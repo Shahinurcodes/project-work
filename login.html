@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>University Study Group Generator - Register</title>
+  <title>University Study Group Generator - Login</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
     body {
@@ -45,7 +45,8 @@
       font-weight: 500;
       margin-bottom: 8px;
     }
-    input {
+    input[type="email"],
+    input[type="password"] {
       padding: 12px 15px;
       margin-bottom: 20px;
       border-radius: 8px;
@@ -54,7 +55,8 @@
       font-size: 1rem;
       transition: box-shadow 0.3s ease;
     }
-    input:focus {
+    input[type="email"]:focus,
+    input[type="password"]:focus {
       box-shadow: 0 0 8px 2px #182848;
     }
     button {
@@ -69,7 +71,7 @@
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #182848;
+      background-color: #6e86b6;
     }
     .switch-link {
       margin-top: 20px;
@@ -77,7 +79,7 @@
       font-weight: 500;
     }
     .switch-link a {
-      color: #9a9fca;
+      color: #8299c7;
       text-decoration: none;
       font-weight: 600;
     }
@@ -85,7 +87,7 @@
       text-decoration: underline;
     }
     .error-msg {
-      background-color: #182848;
+      background-color: rgba(255, 100, 100, 0.9);
       color: white;
       padding: 10px;
       margin-bottom: 15px;
@@ -97,46 +99,37 @@
 </head>
 <body>
   <div class="container" role="main">
-    <h1>Register</h1>
+    <h1>Login</h1>
     <p class="subtitle">University Study Group Generator</p>
     <div id="error" class="error-msg"></div>
-    <form id="registrationForm" novalidate>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required />
-      <label for="id">ID Number</label>
-      <input type="text" id="id" name="id" placeholder="Your ID Number" required />
+    <form id="loginForm" novalidate>
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required />
-      <label for="department">Department Name</label>
-      <input type="text" id="department" name="department" placeholder="Your Department" required />
-      <label for="trimester">Trimester</label>
-      <input type="text" id="trimester" name="trimester" placeholder="Current Trimester" required />
-      <label for="cgpa">CGPA</label>
-      <input type="number" id="cgpa" name="cgpa" placeholder="Your CGPA" step="0.01" required />
-      <button type="submit">Register</button>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="username" />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
+      <button type="submit">Log In</button>
     </form>
-    <p class="switch-link">Already have an account? <a href="login.html">Log In here</a></p>
+    <p class="switch-link">Don't have an account? <a href="registration.html">Register here</a></p>
   </div>
 
   <script>
-    const form = document.getElementById('registrationForm');
+    const form = document.getElementById('loginForm');
     const errorDiv = document.getElementById('error');
 
     form.addEventListener('submit', function(event) {
       event.preventDefault();
       errorDiv.style.display = 'none';
-      const name = form.name.value.trim();
-      const id = form.id.value.trim();
       const email = form.email.value.trim();
-      const department = form.department.value.trim();
-      const trimester = form.trimester.value.trim();
-      const cgpa = form.cgpa.value.trim();
+      const password = form.password.value;
 
-      if (!name || !id || !email || !department || !trimester || !cgpa) {
-        showError('Please fill in all fields.');
+      if (!email) {
+        showError('Please enter your email address.');
         return;
       }
-
+      if (!password) {
+        showError('Please enter your password.');
+        return;
+      }
       // Basic email format validation
       if (!validateEmail(email)) {
         showError('Please enter a valid email address.');
@@ -144,7 +137,7 @@
       }
 
       // Since no backend, just simulate success
-      alert('Registration successful (simulation). You would be redirected or processed further.');
+      alert('Login successful (simulation). You would be redirected or processed further.');
       form.reset();
     });
 
@@ -160,3 +153,4 @@
   </script>
 </body>
 </html>
+
