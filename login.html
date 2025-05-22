@@ -136,9 +136,26 @@
         return;
       }
 
-      // Since no backend, just simulate success
-      alert('Login successful (simulation). You would be redirected or processed further.');
-      form.reset();
+      // Send login request to the backend
+      fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: email, password: password }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Redirect to dashboard on successful login
+          window.location.href = 'dashboard.html';
+        } else {
+          showError(data.message);
+        }
+      })
+      .catch(error => {
+        showError('An error occurred. Please try again later.');
+      });
     });
 
     function showError(message) {
@@ -153,4 +170,5 @@
   </script>
 </body>
 </html>
+
 
