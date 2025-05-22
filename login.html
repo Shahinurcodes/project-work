@@ -142,9 +142,14 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: email, password: password }),
+        body: JSON.stringify({ username: email, password: password }), // Send email as username
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         if (data.success) {
           // Redirect to dashboard on successful login
@@ -164,11 +169,9 @@
     }
 
     function validateEmail(email) {
-      const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Corrected regex for email validation
       return re.test(email);
     }
   </script>
 </body>
 </html>
-
-
