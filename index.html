@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>University Study Group Generator - Welcome</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#4b6cb7, #182848);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .container {
+    max-width: 480px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 3.2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1.5px;
+  }
+
+  .motto {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    color: #d6d2f0;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #c1c8dd;
+    color: #3e2762;
+    font-weight: 600;
+    font-size: 1.15rem;
+    padding: 0.9rem 2.5rem;
+    margin: 0.4rem 0.8rem;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgb(255 204 0 / 0.6);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #5877af;
+    color: #2d214b;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #d6d2f0;
+    user-select: none;
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2.4rem;
+    }
+    .motto {
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main">
+    <h1>University Study Group Generator</h1>
+    <p class="motto">Empowering Collaborative Learning Through Smart Study Groups</p>
+    <a href="login.html" class="btn" role="button">Login</a>
+    <a href="registration.html" class="btn" role="button">Register</a>
+  </div>
+
+  <footer>
+    &copy; 2024 University Study Group Generator. All rights reserved.
+  </footer>
+</body>
+</html>
+
