@@ -136,31 +136,9 @@
         return;
       }
 
-      // Send login request to the backend
-      fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: email, password: password }), // Send email as username
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          // Redirect to dashboard on successful login
-          window.location.href = 'dashboard.html';
-        } else {
-          showError(data.message);
-        }
-      })
-      .catch(error => {
-        showError('An error occurred. Please try again later.');
-      });
+      // Since no backend, just simulate success
+      alert('Login successful (simulation). You would be redirected or processed further.');
+      form.reset();
     });
 
     function showError(message) {
@@ -169,9 +147,10 @@
     }
 
     function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Corrected regex for email validation
+      const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
       return re.test(email);
     }
   </script>
 </body>
 </html>
+

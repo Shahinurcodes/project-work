@@ -1,216 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>University Study Group Generator - Dashboard</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - University Study Group Generator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #f9fafc;
-    color: #333;
-  }
-
-  header {
-    background: linear-gradient(90deg, #4b6cb7, #182848);
-    color: white;
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  header h1 {
-    font-weight: 600;
-    font-size: 1.7rem;
-    margin: 0;
-    letter-spacing: 1.2px;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1.5rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-
-  nav a:hover {
-    color: #ffcc00;
-  }
-
-  main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .welcome-section {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .welcome-section h2 {
-    margin: 0 0 0.5rem 0;
-    font-weight: 600;
-    color: #182848;
-  }
-
-  .welcome-section p {
-    font-size: 1.1rem;
-    color: #555;
-    margin: 0;
-  }
-
-  .stats-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .card {
-    background: linear-gradient(135deg, #4b6cb7, #182848);
-    color: white;
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 6px 10px rgba(70, 110, 190, 0.4);
-    text-align: center;
-  }
-
-  .card h3 {
-    margin: 0 0 0.5rem 0;
-    font-weight: 600;
-    font-size: 1.3rem;
-  }
-
-  .card p {
-    font-size: 2.2rem;
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.8rem;
-    justify-content: center;
-  }
-
-  .btn {
-    background: #ffcc00;
-    border: none;
-    padding: 0.9rem 2rem;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #182848;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgb(255 204 0 / 0.5);
-    transition: background-color 0.3s ease;
-    flex: 1 1 180px;
-    max-width: 250px;
-    text-align: center;
-  }
-
-  .btn:hover {
-    background: #e6b800;
-  }
-
-  footer {
-    margin-top: 3rem;
-    text-align: center;
-    color: #777;
-    padding-bottom: 2rem;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 480px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
+    * {
+      box-sizing: border-box;
     }
 
-    nav {
-      margin-top: 0.8rem;
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4b6cb7,  #182848);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    nav a {
-      margin-left: 0;
-      margin-right: 1.2rem;
-      margin-bottom: 0.6rem;
+    .dashboard-container {
+      background: rgba(255, 255, 255, 0.1);
+      max-width: 900px;
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      padding: 40px 50px;
+      backdrop-filter: blur(15px);
     }
-  }
-</style>
+
+    h1 {
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-align: center;
+      letter-spacing: 1.2px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .welcome-message {
+      font-size: 1.5rem;
+      margin-bottom: 35px;
+      text-align: center;
+      font-weight: 500;
+      color: #dcd6f7;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .buttons-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      background: #fff;
+      color: #654ea3;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.7);
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      min-width: 140px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background-color: #5877af;
+      color: #fff;
+      box-shadow: 0 10px 25px  #5877af;
+    }
+
+    .search-container {
+      max-width: 520px;
+      margin: 0 auto 50px auto;
+      display: flex;
+      gap: 15px;
+    }
+
+    .search-input {
+      flex: 1;
+      border-radius: 35px;
+      padding: 14px 25px;
+      font-size: 1.1rem;
+      border: none;
+      outline: none;
+      font-weight: 500;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-input::placeholder {
+      color: #d3cbf5;
+      font-weight: 400;
+    }
+
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 0 15px rgba(255,255,255,0.8);
+    }
+
+    #groupDetails {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      max-width: 700px;
+      margin: 0 auto;
+      color: #e0dbff;
+    }
+
+    #groupDetails h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 1.9rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+
+    #groupDetails ul {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 1.1rem;
+    }
+
+    #groupDetails ul li {
+      background: rgba(255, 255, 255, 0.15);
+      margin-bottom: 12px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(55, 48, 110, 0.7);
+      transition: background-color 0.3s;
+    }
+
+    #groupDetails ul li:hover {
+      background: rgba(255, 255, 255, 0.3);
+      cursor: default;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .search-container {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        min-width: unset;
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>University Study Group Generator</h1>
-  <nav>
-    <a href="login.html">Login</a>
-    <a href="registration.html">Register</a>
-    <a href="#">Profile</a>
-    <a href="#">Create Group</a>
-    <a href="#">View Groups</a>
-    <a href="#">Logout</a>
-  </nav>
-</header>
 
-<main>
-  <section class="welcome-section">
-    <h2>Welcome Back!</h2>
-    <p>Collaboratively build your study groups based on your interests, availability, and faculty mentorship.</p>
-  </section>
+  <div class="dashboard-container" role="main">
+    <h1>University Study Group Generator</h1>
+    <div class="welcome-message" id="welcomeMessage">Welcome back, Student!</div>
 
-  <section class="stats-cards" aria-label="Study Group Statistics">
-    <article class="card">
-      <h3>Total Groups Formed</h3>
-      <p>24</p>
-    </article>
-    <article class="card">
-      <h3>Active Groups</h3>
-      <p>8</p>
-    </article>
-    <article class="card">
-      <h3>Faculty Mentors</h3>
-      <p>5</p>
-    </article>
-    <article class="card">
-      <h3>Student Participants</h3>
-      <p>72</p>
-    </article>
-  </section>
+    <div class="buttons-row">
+      <a href="login.html" class="btn" aria-label="Login to your account">Login</a>
+      <a href="registration.html" class="btn" aria-label="Register a new account">Register</a>
+    </div>
 
-  <section class="actions" aria-label="Dashboard Actions">
-    <button class="btn" onclick="alert('Feature coming soon: Create a new study group!')">Create Study Group</button>
-    <button class="btn" onclick="alert('Feature coming soon: View your active groups!')">My Groups</button>
-    <button class="btn" onclick="alert('Feature coming soon: View faculty mentors!')">Mentors</button>
-    <button class="btn" onclick="alert('Feature coming soon: Manage your availability!')">Set Availability</button>
-  </section>
-</main>
+    <div class="search-container" role="search" aria-label="Course search">
+      <input type="text" id="courseSearch" class="search-input" placeholder="Search for a course..." aria-required="true" aria-describedby="searchHint" />
+      <button class="btn" id="searchButton">Search</button>
+    </div>
+    <div id="searchHint" class="visually-hidden">Enter course name or code and press Search</div>
 
-<footer>
-  &copy; 2024 University Study Group Generator. All rights reserved.
-</footer>
+    <section id="groupDetails" aria-live="polite" aria-atomic="true">
+      <!-- Search results or group details will appear here -->
+    </section>
+  </div>
+
+  <script>
+    document.getElementById('searchButton').addEventListener('click', function() {
+      const courseInput = document.getElementById('courseSearch');
+      const course = courseInput.value.trim();
+      const groupDetails = document.getElementById('groupDetails');
+
+      if (!course) {
+        groupDetails.innerHTML = `<p style="color:#ffbcbc;">Please enter a course name or code to search.</p>`;
+        courseInput.focus();
+        return;
+      }
+
+      // Simulated group data - replace this with actual backend call
+      const groups = [
+        { name: "Group Alpha", cgpa: 3.7, subject: course, members: 5 },
+        { name: "Group Beta", cgpa: 3.6, subject: course, members: 4 },
+        { name: "Group Gamma", cgpa: 3.8, subject: course, members: 6 },
+      ];
+
+      let html = `<h2>Study Groups for "${course}"</h2><ul>`;
+      groups.forEach(group => {
+        html += `<li><strong>${group.name}:</strong> CGPA ≥ ${group.cgpa.toFixed(1)}, Members: ${group.members}</li>`;
+      });
+      html += `</ul>`;
+
+      groupDetails.innerHTML = html;
+    });
+  </script>
+
+  <style>
+    /* For accessibility: visually hidden */
+    .visually-hidden { 
+      position: absolute !important; 
+      height: 1px; 
+      width: 1px; 
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px); 
+      white-space: nowrap; 
+    }
+  </style>
+
 </body>
 </html>
-
