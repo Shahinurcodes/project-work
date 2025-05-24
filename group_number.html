@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Group Listing - University Study Group Generator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4b6cb7, #182848);
+      color: #fff;
+      min-height: 100vh;
+      line-height: 1.4;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      margin: 0 0 40px 0;
+      letter-spacing: 1.2px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+      text-align: center;
+    }
+
+    .group-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .group-item {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 18px 30px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 6px 18px rgba(255,255,255,0.35);
+      transition: background-color 0.3s, box-shadow 0.3s;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .group-item:hover {
+      background: rgba(255,255,255,0.32);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.6);
+      cursor: pointer;
+    }
+
+    .group-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color:  #182848;
+      min-width: 30px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .group-name {
+      font-size: 1.6rem;
+      font-weight: 600;
+      flex-grow: 4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .group-status {
+      font-size: 1.2rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      min-width: 220px;
+      text-align: right;
+      color: #d1cdf7;
+      letter-spacing: 0.02em;
+    }
+
+    .group-status.active {
+      color: #4adb6c;
+      font-weight: 700;
+    }
+
+    .group-status.inactive {
+      color: #ff6b6b;
+      font-weight: 700;
+    }
+
+    .group-link {
+      text-decoration: none;
+      color:  #acbbda;
+      font-weight: 700;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      transition: color 0.3s;
+      padding: 8px 16px;
+      border: 2px solid  #182848;
+      border-radius: 30px;
+      flex-shrink: 0;
+      user-select: none;
+      box-shadow: 0 4px 15px rgba(111, 84, 200, 0.35);
+    }
+
+    .group-link:hover {
+      color: #fff;
+      background: #182848;
+      border-color:  #182848;
+      box-shadow: 0 8px 25px #182848;
+    }
+
+    .back-button {
+      display: block;
+      max-width: 1100px;
+      margin: 0 auto 30px auto;
+      background: #182848;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 35px;
+      font-weight: 700;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px #4b6cb7;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .back-button:hover {
+      background-color:  #182848;
+      box-shadow: 0 12px 30px  #182848;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      .group-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 18px 20px;
+      }
+      .group-number {
+        min-width: auto;
+        text-align: left;
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+      }
+      .group-name {
+        font-size: 1.4rem;
+        flex-grow: 0;
+        white-space: normal;
+      }
+      .group-status {
+        min-width: auto;
+        text-align: left;
+        font-size: 1rem;
+      }
+      .group-link {
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+        padding: 12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="course-details.html?course=Math%20101" aria-label="Return to course details">← Back to Course Details</a>
+  <h1>Study Groups for DBMS</h1>
+
+  <div class="group-list" id="groupList" role="list">
+    <!-- Group items will be populated here -->
+  </div>
+
+  <script>
+    // Simulated group data for demonstration
+    const simulatedGroups = [
+      { name: "Group 1", membersJoined: 5, capacity: 6, active: true },
+      { name: "Group 2", membersJoined: 4, capacity: 6, active: true },
+      { name: "Group 3", membersJoined: 3, capacity: 6, active: false },
+      { name: "Group 4", membersJoined: 6, capacity: 6, active: true },
+      { name: "Group 5", membersJoined: 2, capacity: 6, active: false },
+    ];
+
+    // Function to load group data
+    function loadGroupData() {
+      const groupList = document.getElementById('groupList');
+      groupList.innerHTML = '';
+
+      simulatedGroups.forEach((group, index) => {
+        const groupItem = document.createElement('div');
+        groupItem.className = 'group-item';
+        groupItem.setAttribute('role','listitem');
+        groupItem.tabIndex = 0; // Make keyboard focusable for accessibility
+
+        // Group number span
+        const groupNumber = document.createElement('span');
+        groupNumber.className = 'group-number';
+        groupNumber.textContent = (index + 1) + '.';
+
+        // Group name span
+        const groupName = document.createElement('span');
+        groupName.className = 'group-name';
+        groupName.textContent = group.name;
+
+        // Group status span
+        const groupStatus = document.createElement('span');
+        groupStatus.className = 'group-status ' + (group.active ? 'active' : 'inactive');
+        groupStatus.textContent = `${group.membersJoined} / ${group.capacity} students`;
+
+        // Group link anchor
+        const groupLink = document.createElement('a');
+        groupLink.className = 'group-link';
+        groupLink.href = `group-details.html?group=${encodeURIComponent(group.name)}`; // Link to detailed group page
+        groupLink.textContent = group.active ? 'View Details' : 'Inactive';
+        if(!group.active) {
+          groupLink.setAttribute('aria-disabled', 'true');
+          groupLink.tabIndex = -1; // Remove from tab order if inactive
+          groupLink.style.pointerEvents = 'none'; // Disable clicks on inactive
+        }
+
+        groupItem.appendChild(groupNumber);
+        groupItem.appendChild(groupName);
+        groupItem.appendChild(groupStatus);
+        groupItem.appendChild(groupLink);
+        groupList.appendChild(groupItem);
+      });
+    }
+
+    // Initialize
+    window.onload = loadGroupData;
+  </script>
+</body>
+</html>
+
