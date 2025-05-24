@@ -14,7 +14,7 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #4b6cb7,  #182848);
+      background: linear-gradient(135deg,#4b6cb7, #182848);
       color: #ffffff;
       min-height: 100vh;
       display: flex;
@@ -31,63 +31,57 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       padding: 40px 50px;
       backdrop-filter: blur(15px);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     h1 {
-      margin-bottom: 10px;
+      margin: 0;
       font-weight: 700;
       font-size: 2.8rem;
-      text-align: center;
       letter-spacing: 1.2px;
       text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
     .welcome-message {
-      font-size: 1.5rem;
-      margin-bottom: 35px;
-      text-align: center;
+      font-size: 1.3rem;
       font-weight: 500;
       color: #dcd6f7;
       text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    .buttons-row {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      background: #fff;
-      color: #654ea3;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 14px 32px;
+    #logoutBtn {
+      background: #4b6cb7;
       border: none;
       border-radius: 35px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.7);
-      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      min-width: 140px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
+      box-shadow: 0 4px 15px #182848;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
     }
-
-    .btn:hover {
-      background-color: #5877af;
-      color: #fff;
-      box-shadow: 0 10px 25px  #5877af;
+    #logoutBtn:hover {
+      background: #4b6cb7;
+      box-shadow: 0 6px 25px #182848;
     }
 
     .search-container {
       max-width: 520px;
-      margin: 0 auto 50px auto;
+      width: 100%;
       display: flex;
       gap: 15px;
+      align-items: center;
     }
 
     .search-input {
@@ -114,14 +108,32 @@
       box-shadow: inset 0 0 15px rgba(255,255,255,0.8);
     }
 
+    #searchButton {
+      background: #4b6cb7;
+      border: none;
+      border-radius: 35px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 6px 15px  #182848;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    #searchButton:hover {
+      background-color: #4b6cb7;
+      box-shadow: 0 8px 18px #182848;
+    }
+
     #groupDetails {
       background: rgba(255, 255, 255, 0.12);
       border-radius: 12px;
       padding: 25px 30px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       max-width: 700px;
-      margin: 0 auto;
       color: #e0dbff;
+      margin-top: 0;
     }
 
     #groupDetails h2 {
@@ -153,40 +165,65 @@
 
     /* Responsive */
     @media (max-width: 600px) {
+      body {
+        padding: 20px 10px;
+        align-items: center;
+      }
+      .dashboard-container {
+        padding: 30px 25px;
+        gap: 25px;
+      }
       .search-container {
         flex-direction: column;
+        gap: 10px;
       }
-      .btn {
+      #searchButton {
         width: 100%;
-        min-width: unset;
+      }
+      #logoutBtn {
+        padding: 12px 22px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="dashboard-container" role="main">
-    <h1>University Study Group Generator</h1>
+  <div class="dashboard-container" role="main" aria-label="Study Group Dashboard">
+    <header>
+      <h1>University Study Group Generator</h1>
+      <button id="logoutBtn" aria-label="Log out from your account">Logout</button>
+    </header>
+
     <div class="welcome-message" id="welcomeMessage">Welcome back, Student!</div>
 
-    <div class="buttons-row">
-      <a href="login.html" class="btn" aria-label="Login to your account">Login</a>
-      <a href="registration.html" class="btn" aria-label="Register a new account">Register</a>
+    <div class="search-container" role="search">
+      <input 
+        type="search" 
+        id="courseSearch" 
+        class="search-input" 
+        placeholder="Search for your course..." 
+        aria-required="true" 
+        aria-label="Course search input" />
+      <button id="searchButton">Search</button>
     </div>
-
-    <div class="search-container" role="search" aria-label="Course search">
-      <input type="text" id="courseSearch" class="search-input" placeholder="Search for a course..." aria-required="true" aria-describedby="searchHint" />
-      <button class="btn" id="searchButton">Search</button>
-    </div>
-    <div id="searchHint" class="visually-hidden">Enter course name or code and press Search</div>
 
     <section id="groupDetails" aria-live="polite" aria-atomic="true">
-      <!-- Search results or group details will appear here -->
+      <!-- Group details will show here -->
     </section>
   </div>
 
   <script>
-    document.getElementById('searchButton').addEventListener('click', function() {
+    // Example: dynamically set a user name if you track logged-in user info
+    // document.getElementById('welcomeMessage').textContent = `Welcome back, ${userName}!`;
+    // Here we keep the placeholder static “Student!” for demonstration.
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      // Implement your logout logic here, e.g., clear session/localStorage and redirect login page
+      alert('Logged out successfully!');
+      window.location.href = 'login.html'; // Redirect to login page after logout
+    });
+
+    document.getElementById('searchButton').addEventListener('click', function () {
       const courseInput = document.getElementById('courseSearch');
       const course = courseInput.value.trim();
       const groupDetails = document.getElementById('groupDetails');
@@ -197,7 +234,7 @@
         return;
       }
 
-      // Simulated group data - replace this with actual backend call
+      // Simulate fetched study groups for demonstration
       const groups = [
         { name: "Group Alpha", cgpa: 3.7, subject: course, members: 5 },
         { name: "Group Beta", cgpa: 3.6, subject: course, members: 4 },
@@ -214,17 +251,6 @@
     });
   </script>
 
-  <style>
-    /* For accessibility: visually hidden */
-    .visually-hidden { 
-      position: absolute !important; 
-      height: 1px; 
-      width: 1px; 
-      overflow: hidden;
-      clip: rect(1px, 1px, 1px, 1px); 
-      white-space: nowrap; 
-    }
-  </style>
-
 </body>
 </html>
+
