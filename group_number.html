@@ -1,246 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Group Listing - University Study Group Generator</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    body {
-      margin: 40px 20px;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      color: #fff;
-      min-height: 100vh;
-      line-height: 1.4;
-    }
-
-    h1 {
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin: 0 0 40px 0;
-      letter-spacing: 1.2px;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.45);
-      text-align: center;
-    }
-
-    .group-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
-
-    .group-item {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 18px 30px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      box-shadow: 0 6px 18px rgba(255,255,255,0.35);
-      transition: background-color 0.3s, box-shadow 0.3s;
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .group-item:hover {
-      background: rgba(255,255,255,0.32);
-      box-shadow: 0 10px 30px rgba(255,255,255,0.6);
-      cursor: pointer;
-    }
-
-    .group-number {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color:  #182848;
-      min-width: 30px;
-      text-align: center;
-      user-select: none;
-    }
-
-    .group-name {
-      font-size: 1.6rem;
-      font-weight: 600;
-      flex-grow: 4;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .group-status {
-      font-size: 1.2rem;
-      font-weight: 500;
-      flex-shrink: 0;
-      min-width: 220px;
-      text-align: right;
-      color: #d1cdf7;
-      letter-spacing: 0.02em;
-    }
-
-    .group-status.active {
-      color: #4adb6c;
-      font-weight: 700;
-    }
-
-    .group-status.inactive {
-      color: #ff6b6b;
-      font-weight: 700;
-    }
-
-    .group-link {
-      text-decoration: none;
-      color:  #acbbda;
-      font-weight: 700;
-      font-size: 1.1rem;
-      white-space: nowrap;
-      transition: color 0.3s;
-      padding: 8px 16px;
-      border: 2px solid  #182848;
-      border-radius: 30px;
-      flex-shrink: 0;
-      user-select: none;
-      box-shadow: 0 4px 15px rgba(111, 84, 200, 0.35);
-    }
-
-    .group-link:hover {
-      color: #fff;
-      background: #182848;
-      border-color:  #182848;
-      box-shadow: 0 8px 25px #182848;
-    }
-
-    .back-button {
-      display: block;
-      max-width: 1100px;
-      margin: 0 auto 30px auto;
-      background: #182848;
-      border: none;
-      padding: 14px 34px;
-      border-radius: 35px;
-      font-weight: 700;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 8px 20px #4b6cb7;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .back-button:hover {
-      background-color:  #182848;
-      box-shadow: 0 12px 30px  #182848;
-    }
-
-    /* Responsive */
-    @media (max-width: 720px) {
-      h1 {
-        font-size: 2.4rem;
-      }
-      .group-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 18px 20px;
-      }
-      .group-number {
-        min-width: auto;
-        text-align: left;
-        font-size: 1.3rem;
-        margin-bottom: 5px;
-      }
-      .group-name {
-        font-size: 1.4rem;
-        flex-grow: 0;
-        white-space: normal;
-      }
-      .group-status {
-        min-width: auto;
-        text-align: left;
-        font-size: 1rem;
-      }
-      .group-link {
-        width: 100%;
-        text-align: center;
-        font-size: 1.1rem;
-        padding: 12px 0;
-      }
-    }
-  </style>
-</head>
-<body>
-  <a class="back-button" href="dashboard.html" aria-label="Return to dashboard">← Back to Course Details</a>
-  <h1>Study Groups for DBMS</h1>
-
-  <div class="group-list" id="groupList" role="list">
-    <!-- Group items will be populated here -->
-  </div>
-
-  <script>
-    // Simulated group data for demonstration
-    const simulatedGroups = [
-      { name: "Group 1", membersJoined: 5, capacity: 6, active: true },
-      { name: "Group 2", membersJoined: 4, capacity: 6, active: true },
-      { name: "Group 3", membersJoined: 3, capacity: 6, active: false },
-      { name: "Group 4", membersJoined: 6, capacity: 6, active: true },
-      { name: "Group 5", membersJoined: 2, capacity: 6, active: false },
-    ];
-
-    // Function to load group data
-    function loadGroupData() {
-      const groupList = document.getElementById('groupList');
-      groupList.innerHTML = '';
-
-      simulatedGroups.forEach((group, index) => {
-        const groupItem = document.createElement('div');
-        groupItem.className = 'group-item';
-        groupItem.setAttribute('role','listitem');
-        groupItem.tabIndex = 0; // Make keyboard focusable for accessibility
-
-        // Group number span
-        const groupNumber = document.createElement('span');
-        groupNumber.className = 'group-number';
-        groupNumber.textContent = (index + 1) + '.';
-
-        // Group name span
-        const groupName = document.createElement('span');
-        groupName.className = 'group-name';
-        groupName.textContent = group.name;
-
-        // Group status span
-        const groupStatus = document.createElement('span');
-        groupStatus.className = 'group-status ' + (group.active ? 'active' : 'inactive');
-        groupStatus.textContent = `${group.membersJoined} / ${group.capacity} students`;
-
-        // Group link anchor
-        const groupLink = document.createElement('a');
-        groupLink.className = 'group-link';
-        groupLink.href = `group-details.html?group=${encodeURIComponent(group.name)}`; // Link to detailed group page
-        groupLink.textContent = group.active ? 'View Details' : 'Inactive';
-        if(!group.active) {
-          groupLink.setAttribute('aria-disabled', 'true');
-          groupLink.tabIndex = -1; // Remove from tab order if inactive
-          groupLink.style.pointerEvents = 'none'; // Disable clicks on inactive
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Groups | Study Group Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6c757d;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
         }
 
-        groupItem.appendChild(groupNumber);
-        groupItem.appendChild(groupName);
-        groupItem.appendChild(groupStatus);
-        groupItem.appendChild(groupLink);
-        groupList.appendChild(groupItem);
-      });
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    // Initialize
-    window.onload = loadGroupData;
-  </script>
+        body {
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .back-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .course-header {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .course-header h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--secondary);
+            margin-top: 15px;
+        }
+
+        /* Groups List */
+        .groups-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            color: var(--dark);
+        }
+
+        .groups-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .group-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .group-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.1);
+        }
+
+        .group-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .group-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .group-members {
+            color: var(--secondary);
+        }
+
+        .group-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .status-inactive {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .group-faculty {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .view-group {
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .course-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .groups-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="logo-text">Study Group Generator</div>
+        </div>
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Course Header -->
+        <section class="course-header">
+            <h1>CSE-203: Data Structures & Algorithms</h1>
+            <p>Available study groups for this course</p>
+            <div class="course-meta">
+                <span><i class="fas fa-book"></i> Computer Science Department</span>
+                <span><i class="fas fa-clock"></i> Trimester 3</span>
+            </div>
+        </section>
+
+        <!-- Groups List -->
+        <section class="groups-section">
+            <div class="section-header">
+                <h2>Available Groups (3)</h2>
+            </div>
+            <div class="groups-list">
+                <!-- Group 1 -->
+                <div class="group-card" onclick="window.location.href='group-details.html?id=1'">
+                    <div class="group-name">Team 1</div>
+                    <div class="group-meta">
+                        <div class="group-members">
+                            <i class="fas fa-users"></i> 4/6 members
+                        </div>
+                        <div class="group-status status-active">
+                            Active
+                        </div>
+                    </div>
+                    <div class="group-faculty">
+                        <i class="fas fa-chalkboard-teacher"></i> Mentored by Dr. Smith
+                    </div>
+                    <a href="group-details.html?id=1" class="view-group">
+                        View Group <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="group-card" onclick="window.location.href='group-details.html?id=2'">
+                    <div class="group-name">Team 2</div>
+                    <div class="group-meta">
+                        <div class="group-members">
+                            <i class="fas fa-users"></i> 6/6 members
+                        </div>
+                        <div class="group-status status-active">
+                            Active (Full)
+                        </div>
+                    </div>
+                    <div class="group-faculty">
+                        <i class="fas fa-chalkboard-teacher"></i> Mentored by Prof. Johnson
+                    </div>
+                    <a href="group-details.html?id=2" class="view-group">
+                        View Group <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="group-card" onclick="window.location.href='group-details.html?id=3'">
+                    <div class="group-name">Team 3</div>
+                    <div class="group-meta">
+                        <div class="group-members">
+                            <i class="fas fa-users"></i> 2/6 members
+                        </div>
+                        <div class="group-status status-inactive">
+                            Inactive
+                        </div>
+                    </div>
+                    <div class="group-faculty">
+                        <i class="fas fa-chalkboard-teacher"></i> Mentored by Dr. Williams
+                    </div>
+                    <a href="group-details.html?id=3" class="view-group">
+                        View Group <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Sample functionality to handle group clicks
+        document.querySelectorAll('.group-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // In a real app, this would navigate to group details
+                console.log('Viewing group details');
+            });
+        });
+    </script>
 </body>
 </html>
-

@@ -1,156 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>University Study Group Generator - Login</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: #fff;
-    }
-    .container {
-      background: rgba(255,255,255,0.1);
-      padding: 40px 50px;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      max-width: 400px;
-      width: 100%;
-      backdrop-filter: blur(10px);
-    }
-    h1 {
-      text-align: center;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    p.subtitle {
-      text-align: center;
-      font-weight: 300;
-      margin-bottom: 30px;
-      font-size: 1rem;
-      color: #e0d7f0;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-    input[type="email"],
-    input[type="password"] {
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      transition: box-shadow 0.3s ease;
-    }
-    input[type="email"]:focus,
-    input[type="password"]:focus {
-      box-shadow: 0 0 8px 2px #182848;
-    }
-    button {
-      background-color: #182848;
-      color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #6e86b6;
-    }
-    .switch-link {
-      margin-top: 20px;
-      text-align: center;
-      font-weight: 500;
-    }
-    .switch-link a {
-      color: #8299c7;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .switch-link a:hover {
-      text-decoration: underline;
-    }
-    .error-msg {
-      background-color: rgba(255, 100, 100, 0.9);
-      color: white;
-      padding: 10px;
-      margin-bottom: 15px;
-      text-align: center;
-      border-radius: 6px;
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Group Generator | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6c757d;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --error: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Logo & Title */
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+
+        /* Login Form */
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 5px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3a5bef;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(74, 107, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .register-link {
+            margin-top: 20px;
+            color: var(--secondary);
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .login-form {
+                padding: 0 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <h1>Login</h1>
-    <p class="subtitle">University Study Group Generator</p>
-    <div id="error" class="error-msg"></div>
-    <form id="loginForm" novalidate>
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="username" />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
-      <button type="submit">Log In</button>
-    </form>
-    <p class="switch-link">Don't have an account? <a href="registration.html">Register here</a></p>
-  </div>
+    <!-- Logo -->
+    <div class="logo">
+        <i class="fas fa-users"></i>
+    </div>
 
-  <script>
-    const form = document.getElementById('loginForm');
-    const errorDiv = document.getElementById('error');
+    <!-- Title -->
+    <h1>University Study Group Generator</h1>
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      errorDiv.style.display = 'none';
-      const email = form.email.value.trim();
-      const password = form.password.value;
-
-      if (!email) {
-        showError('Please enter your email address.');
-        return;
-      }
-      if (!password) {
-        showError('Please enter your password.');
-        return;
-      }
-      // Basic email format validation
-      if (!validateEmail(email)) {
-        showError('Please enter a valid email address.');
-        return;
-      }
-
-      // Since no backend, just simulate success
-      alert('Login successful (simulation). You would be redirected or processed further.');
-      form.reset();
-    });
-
-    function showError(message) {
-      errorDiv.textContent = message;
-      errorDiv.style.display = 'block';
-    }
-
-    function validateEmail(email) {
-      const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-      return re.test(email);
-    }
-  </script>
+    <!-- Login Form -->
+    <div class="login-form">
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+        
+        <div class="register-link">
+            Don't have an account? <a href="register.html">Register here</a>
+        </div>
+    </div>
 </body>
 </html>
-

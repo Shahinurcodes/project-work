@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Registration | Study Group Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6c757d;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Logo & Title */
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Registration Form */
+        .register-form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header p {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3a5bef;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(74, 107, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Login Link */
+        .login-link {
+            margin-top: 20px;
+            color: var(--secondary);
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Specialization Section */
+        .specialization-section {
+            margin-top: 20px;
+        }
+
+        .specialization-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .specialization-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .specialization-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .specialization-item input {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo">
+        <i class="fas fa-chalkboard-teacher"></i>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="register-form">
+        <div class="form-header">
+            <h1>Faculty Registration</h1>
+            <p>Create your account to mentor student study groups</p>
+        </div>
+
+        <form>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="Enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Enter your last name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">University Email</label>
+                <input type="email" id="email" placeholder="Enter your university email" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="facultyId">Faculty ID</label>
+                    <input type="text" id="facultyId" placeholder="Enter your faculty ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" required>
+                        <option value="">Select your department</option>
+                        <option value="cse">Computer Science & Engineering</option>
+                        <option value="eee">Electrical & Electronic Engineering</option>
+                        <option value="bba">Business Administration</option>
+                        <option value="eco">Economics</option>
+                        <option value="eng">English</option>
+                        <option value="mat">Mathematics</option>
+                        <option value="phy">Physics</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+            </div>
+
+            <div class="specialization-section">
+                <div class="specialization-title">Areas of Specialization (Select all that apply):</div>
+                <div class="specialization-list">
+                    <div class="specialization-item">
+                        <input type="checkbox" id="algorithms" name="specialization">
+                        <label for="algorithms">Algorithms</label>
+                    </div>
+                    <div class="specialization-item">
+                        <input type="checkbox" id="databases" name="specialization">
+                        <label for="databases">Databases</label>
+                    </div>
+                    <div class="specialization-item">
+                        <input type="checkbox" id="ai" name="specialization">
+                        <label for="ai">Artificial Intelligence</label>
+                    </div>
+                    <div class="specialization-item">
+                        <input type="checkbox" id="networks" name="specialization">
+                        <label for="networks">Computer Networks</label>
+                    </div>
+                    <div class="specialization-item">
+                        <input type="checkbox" id="software" name="specialization">
+                        <label for="software">Software Engineering</label>
+                    </div>
+                    <div class="specialization-item">
+                        <input type="checkbox" id="theory" name="specialization">
+                        <label for="theory">Theory of Computation</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Brief Bio (Optional)</label>
+                <textarea id="bio" rows="3" placeholder="Tell students about your teaching experience and research interests" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Register as Faculty
+                </button>
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Login here</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // In a real app, this would submit the form
+            alert('Faculty registration submitted successfully!');
+            window.location.href = 'faculty-dashboard.html';
+        });
+    </script>
+</body>
+</html>

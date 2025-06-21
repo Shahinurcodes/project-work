@@ -1,98 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>University Study Group Generator - Welcome</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Group Generator | Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6c757d;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
 
-  * {
-    box-sizing: border-box;
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#4b6cb7, #182848);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: white;
-    text-align: center;
-    padding: 0 1rem;
-  }
+        body {
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
 
-  .container {
-    max-width: 480px;
-  }
+        /* Logo & Title */
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+        }
 
-  h1 {
-    font-weight: 700;
-    font-size: 3.2rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1.5px;
-  }
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
 
-  .motto {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    color: #d6d2f0;
-  }
+        /* Quote */
+        .quote {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-  .btn {
-    display: inline-block;
-    background: #c1c8dd;
-    color: #3e2762;
-    font-weight: 600;
-    font-size: 1.15rem;
-    padding: 0.9rem 2.5rem;
-    margin: 0.4rem 0.8rem;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 6px 12px rgba(196, 198, 219, 0.6);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+        .quote::before, .quote::after {
+            content: '"';
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
 
-  .btn:hover {
-    background-color: #5877af;
-    color: #2d214b;
-  }
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
 
-  footer {
-    position: fixed;
-    bottom: 1rem;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #d6d2f0;
-    user-select: none;
-  }
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 200px;
+        }
 
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 2.4rem;
-    }
-    .motto {
-      font-size: 1rem;
-    }
-  }
-</style>
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #3a5bef;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(74, 107, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-3px);
+        }
+
+        /* Faculty Section */
+        .faculty-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .faculty-text {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <h1>University Study Group Generator</h1>
-    <p class="motto">Empowering Collaborative Learning Through Smart Study Groups</p>
-    <a href="login.html" class="btn" role="button">Login</a>
-    <a href="registration.html" class="btn" role="button">Register</a>
-  </div>
+    <!-- Logo -->
+    <div class="logo">
+        <i class="fas fa-users"></i>
+    </div>
 
-  <footer>
-    &copy; 2024 University Study Group Generator. All rights reserved.
-  </footer>
+    <!-- Title -->
+    <h1>University Study Group Generator</h1>
+
+    <!-- Quote -->
+    <p class="quote">Collaborate. Learn. Succeed.</p>
+
+    <!-- Buttons -->
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="window.location.href='login.html'">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button class="btn btn-outline" onclick="window.location.href='student-register.html'">
+            <i class="fas fa-user-graduate"></i> Student Registration
+        </button>
+    </div>
+
+    <!-- Faculty Section -->
+    <div class="faculty-section">
+        <p class="faculty-text">Are you a faculty member?</p>
+        <button class="btn btn-secondary" onclick="window.location.href='faculty-register.html'">
+            <i class="fas fa-chalkboard-teacher"></i> Faculty Registration
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 Study Group Generator. All rights reserved.</p>
+    </div>
 </body>
 </html>
-

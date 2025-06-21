@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Details | Study Group Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6c757d;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .back-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .group-header {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .group-header h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .group-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--secondary);
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .enroll-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .enroll-btn:hover {
+            background: #3a5bef;
+            transform: translateY(-2px);
+        }
+
+        /* Group Info Sections */
+        .group-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .group-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .group-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Members Section */
+        .members-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .member-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .member-card:hover {
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .member-meta {
+            display: flex;
+            gap: 10px;
+            color: var(--secondary);
+            font-size: 0.8rem;
+        }
+
+        .leader-badge {
+            background: var(--warning);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* Calendar Section */
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar th {
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .calendar td {
+            border: 1px solid #eee;
+            padding: 10px;
+            text-align: center;
+            height: 60px;
+            vertical-align: top;
+        }
+
+        .calendar-day {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .study-session {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-top: 3px;
+        }
+
+        .faculty-available {
+            background: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-top: 3px;
+        }
+
+        /* Notes Section */
+        .notes-form {
+            margin-top: 20px;
+        }
+
+        .notes-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            min-height: 100px;
+        }
+
+        .notes-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        .notes-list {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .note-item {
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+        }
+
+        .note-author {
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .note-date {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .note-content {
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="logo-text">Study Group Generator</div>
+        </div>
+        <a href="groups.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Groups
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Group Header -->
+        <section class="group-header">
+            <h1>Team 1</h1>
+            <p>Study group for CSE-203: Data Structures & Algorithms</p>
+            <div class="group-meta">
+                <span><i class="fas fa-users"></i> 4/6 members</span>
+                <span><i class="fas fa-chalkboard-teacher"></i> Mentored by Mr. Didar Sir</span>
+                <span><i class="fas fa-star"></i> Average CGPA: 3.65</span>
+                <span class="status-active"><i class="fas fa-circle"></i> Active</span>
+            </div>
+            <button class="enroll-btn">
+                <i class="fas fa-user-plus"></i> Enroll in Group
+            </button>
+        </section>
+
+        <!-- Group Sections -->
+        <div class="group-sections">
+            <!-- Members Section -->
+            <section class="group-section">
+                <h2 class="section-title">Group Members</h2>
+                <div class="members-list">
+                    <!-- Leader 1 -->
+                    <div class="member-card">
+                        <div class="member-avatar">AD</div>
+                        <div class="member-info">
+                            <div class="member-name">Alham Dina</div>
+                            <div class="member-meta">
+                                <span>CGPA: 3.82</span>
+                                <span class="leader-badge">Group Leader</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leader 2 -->
+                    <div class="member-card">
+                        <div class="member-avatar">MR</div>
+                        <div class="member-info">
+                            <div class="member-name">Mahmudur Rahman</div>
+                            <div class="member-meta">
+                                <span>CGPA: 3.80</span>
+                                <span class="leader-badge">Group Leader</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div class="member-card">
+                        <div class="member-avatar">TI</div>
+                        <div class="member-info">
+                            <div class="member-name">Tanvir Islam</div>
+                        
+                            <div class="member-meta">
+                                 <span>Trimester 6</span>
+                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member 4 -->
+                    <div class="member-card">
+                        <div class="member-avatar">SS</div>
+                        <div class="member-info">
+                            <div class="member-name">Shahinur Sultana</div>
+                            <div class="member-meta">
+                                <span>Trimester 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendar Section -->
+            <section class="group-section">
+                <h2 class="section-title">Study Schedule</h2>
+                <table class="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="calendar-day">1</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">2</div>
+                                <div class="study-session">3:00-5:00 PM</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">3</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">4</div>
+                                <div class="faculty-available">Mr.Didar available</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">5</div>
+                                <div class="study-session">4:00-6:00 PM</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">6</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">7</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="calendar-day">8</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">9</div>
+                                <div class="study-session">3:00-5:00 PM</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">10</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">11</div>
+                                <div class="faculty-available">Mr.Didar available</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">12</div>
+                                <div class="study-session">4:00-6:00 PM</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">13</div>
+                            </td>
+                            <td>
+                                <div class="calendar-day">14</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Notes Section -->
+            <section class="group-section">
+                <h2 class="section-title">Group Notes</h2>
+                <form class="notes-form">
+                    <textarea class="notes-input" placeholder="Share your notes with the group..."></textarea>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-share"></i> Share Note
+                    </button>
+                </form>
+                <div class="notes-list">
+                    <div class="note-item">
+                        <div class="note-author">Alham Dina</div>
+                        <div class="note-date">May 2, 2023</div>
+                        <div class="note-content">
+                            Here are my notes on binary search trees. 
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-author">Tanvir</div>
+                        <div class="note-date">April 28, 2023</div>
+                        <div class="note-content">
+                            I've summarized the key points from chapter 4 
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Enroll button functionality
+        document.querySelector('.enroll-btn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to enroll in this study group?')) {
+                alert('You have successfully enrolled in this group!');
+                this.textContent = 'Enrolled';
+                this.style.background = 'var(--success)';
+            }
+        });
+
+        // Notes form submission
+        document.querySelector('.notes-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const noteContent = this.querySelector('.notes-input').value;
+            if (noteContent.trim()) {
+                alert('Note submitted successfully!');
+                this.querySelector('.notes-input').value = '';
+                
+                // In a real app, this would add the note to the notes list
+                // Here we'll just simulate it
+                const notesList = document.querySelector('.notes-list');
+                const newNote = document.createElement('div');
+                newNote.className = 'note-item';
+                newNote.innerHTML = `
+                    <div class="note-author">You</div>
+                    <div class="note-date">Just now</div>
+                    <div class="note-content">${noteContent}</div>
+                `;
+                notesList.prepend(newNote);
+            }
+        });
+    </script>
+</body>
+</html>
